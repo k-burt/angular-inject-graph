@@ -1,7 +1,7 @@
 {
-  "name": "angular-architecture-graph",
-  "version": "0.2.4",
-  "description": "Create a graph of an angular project's architecture",
+  "name": "angular-inject-graph",
+  "version": "0.3.0",
+  "description": "Create a graph of an angular project's dependencies",
   "main": "index.js",
   "scripts": {
     "test": "grunt test"
@@ -11,18 +11,18 @@
     "architecture",
     "graph"
   ],
-  "author": "João Figueiredo <@lucalanca>",
+  "author": "Kyle Burton <@k-burt>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lucalanca/angular-architecture-graph.git"
+    "url": "git://github.com/k-burt/angular-inject-graph.git"
   },
   "bugs": {
-    "url": "https://github.com/lucalanca/angular-architecture-graph/issues"
+    "url": "https://github.com/k-burt/angular-inject-graph/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/lucalanca/angular-architecture-graph/blob/master/LICENSE-MIT"
+      "url": "https://github.com/k-burt/angular-inject-graph/blob/master/LICENSE-MIT"
     }
   ],
   "devDependencies": {

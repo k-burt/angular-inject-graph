@@ -39,11 +39,13 @@ api.methods.forEach(function(method) {
 });
 
 ["controller", "factory", "service", "filter", "provider", "directive", "component"].forEach(function (method) {
-  Module.prototype[ method ] = function (name, deps) {
+  Module.prototype[ method ] = function (name, param) {
     if (!name) {
       return this;
     }
-    deps = utils.parseAngularDeps(deps).deps;
+    if (param) {
+      var deps = utils.parseAngularDeps(param.controller ? param.controller : param).deps;
+    }
 
     // Exclude angular services from dependencies
     if (this.options.hideAngularServices) {

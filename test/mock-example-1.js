@@ -94,4 +94,113 @@ describe("process factories", function() {
     });
 
   });
+
+  describe("$inject usage", function() {
+    var options = {
+      hideAngularServices: false
+    };
+
+    beforeEach(function()  {
+      angular = require("../src/fake-angular")(options);
+      require("../test-mocks/example1")(angular);
+    });
+
+    it("should use $inject for deps over the function names", function() {
+      var DollarSignInjectDependenciesService = angular.modulesMap.example1.factories[6];
+
+      DollarSignInjectDependenciesService.deps.should.have.a.lengthOf(3);
+      DollarSignInjectDependenciesService.deps[0].should.be.equal("$http");
+      DollarSignInjectDependenciesService.deps[1].should.be.equal("ServiceX");
+      DollarSignInjectDependenciesService.deps[2].should.be.equal("ServiceY");
+    });
+  });
+
+  describe("components", function() {
+    describe("hide angular services", function() {
+      var options = {
+        hideAngularServices: true
+      };
+
+      beforeEach(function()  {
+        angular = require("../src/fake-angular")(options);
+        require("../test-mocks/example1")(angular);
+      });
+
+      it('should parse dependencies from $inject array', function() {
+        var dollarSignInjectComponent = angular.modulesMap.example1.components[0];
+        dollarSignInjectComponent.deps.should.have.a.lengthOf(2);
+        dollarSignInjectComponent.deps[0].should.be.equal("ServiceX");
+        dollarSignInjectComponent.deps[1].should.be.equal("ServiceY");
+      });
+
+      it('should parse dependencies even when none are provided using only function args', function () {
+        var noDependenciesCtrl1 = angular.modulesMap.example1.components[1];
+        noDependenciesCtrl1.deps.should.have.a.lengthOf(0);
+      });
+
+      it('should parse dependencies even when none are provided using the array/function syntax', function () {
+        var noDependenciesCtrl2 = angular.modulesMap.example1.components[2];
+        noDependenciesCtrl2.deps.should.have.a.lengthOf(0);
+      });
+
+      it('should exclude angular services when parsing dependencies from the function args', function() {
+        var mixedDependencyComponent1 = angular.modulesMap.example1.components[5];
+        mixedDependencyComponent1.deps.should.have.a.lengthOf(2);
+        mixedDependencyComponent1.deps[0].should.be.equal("ServiceX");
+        mixedDependencyComponent1.deps[1].should.be.equal("ServiceY");
+      });
+
+      it('should exclude angular services when parsing dependencies from the array/function syntax', function() {
+        var mixedDependencyComponent2 = angular.modulesMap.example1.components[6];
+        mixedDependencyComponent2.deps.should.have.a.lengthOf(2);
+        mixedDependencyComponent2.deps[0].should.be.equal("ServiceX");
+        mixedDependencyComponent2.deps[1].should.be.equal("ServiceY");
+      });
+    });
+
+    describe("don't hide angular services", function() {
+      var options = {
+        hideAngularServices: false
+      };
+
+      beforeEach(function()  {
+        angular = require("../src/fake-angular")(options);
+        require("../test-mocks/example1")(angular);
+      });
+
+      it('should parse dependencies from $inject array', function() {
+        var dollarSignInjectComponent = angular.modulesMap.example1.components[0];
+        dollarSignInjectComponent.deps.should.have.a.lengthOf(3);
+        dollarSignInjectComponent.deps[0].should.be.equal("$http");
+        dollarSignInjectComponent.deps[1].should.be.equal("ServiceX");
+        dollarSignInjectComponent.deps[2].should.be.equal("ServiceY");
+      });
+
+      it('should parse dependencies even when none are provided using only function args', function () {
+        var noDependenciesCtrl1 = angular.modulesMap.example1.components[1];
+        noDependenciesCtrl1.deps.should.have.a.lengthOf(0);
+      });
+
+      it('should parse dependencies even when none are provided using the array/function syntax', function () {
+        var noDependenciesCtrl2 = angular.modulesMap.example1.components[2];
+        noDependenciesCtrl2.deps.should.have.a.lengthOf(0);
+      });
+
+      it('should include angular services when parsing dependencies from the function args', function() {
+        var mixedDependencyComponent1 = angular.modulesMap.example1.components[5];
+        mixedDependencyComponent1.deps.should.have.a.lengthOf(3);
+        mixedDependencyComponent1.deps[0].should.be.equal("$http");
+        mixedDependencyComponent1.deps[1].should.be.equal("ServiceX");
+        mixedDependencyComponent1.deps[2].should.be.equal("ServiceY");
+      });
+
+      it('should include angular services when parsing dependencies from the array/function syntax', function() {
+        var mixedDependencyComponent2 = angular.modulesMap.example1.components[6];
+        mixedDependencyComponent2.deps.should.have.a.lengthOf(3);
+        mixedDependencyComponent2.deps[0].should.be.equal("$http");
+        mixedDependencyComponent2.deps[1].should.be.equal("ServiceX");
+        mixedDependencyComponent2.deps[2].should.be.equal("ServiceY");
+      });
+    });
+  });
 });

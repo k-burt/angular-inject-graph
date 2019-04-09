@@ -22,15 +22,20 @@ module.exports = function(angular) {
     function ($http, ServiceX, ServiceY) { return noopService; }
   ];
 
+  var DollarSignInjectDependenciesService = function(youCanNameThese, absolutelyAnything, $injectTakesCareOfEverything) {
+    return noopService;
+  };
+
+  DollarSignInjectDependenciesService.$inject = ["$http", "ServiceX", "ServiceY"];
 
   angular.module("example1")
-  angular.module("example1").factory("NoDependenciesService1",         NoDependenciesService);
-  angular.module("example1").factory("NoDependenciesService2",         NoDependenciesService2);
-  angular.module("example1").factory("OneAngularDependencyService1",   OneAngularDependencyService1);
-  angular.module("example1").factory("OneAngularDependencyService2",   OneAngularDependencyService2);
-  angular.module("example1").factory("MixedDependenciesService1",      MixedDependenciesService1);
-  angular.module("example1").factory("MixedDependenciesService2",      MixedDependenciesService2);
-
+  angular.module("example1").factory("NoDependenciesService1",                   NoDependenciesService);
+  angular.module("example1").factory("NoDependenciesService2",                   NoDependenciesService2);
+  angular.module("example1").factory("OneAngularDependencyService1",             OneAngularDependencyService1);
+  angular.module("example1").factory("OneAngularDependencyService2",             OneAngularDependencyService2);
+  angular.module("example1").factory("MixedDependenciesService1",                MixedDependenciesService1);
+  angular.module("example1").factory("MixedDependenciesService2",                MixedDependenciesService2);
+  angular.module("example1").factory("DollarSignInjectDependenciesService",      DollarSignInjectDependenciesService);
 
 
   function NoDependenciesCtrl () { return noopService; }
@@ -49,10 +54,59 @@ module.exports = function(angular) {
     function ($http, ServiceX, ServiceY) { return noopService; }
   ];
 
+  var DollarSignInjectController = function(theseNames, doNotMatter, atAll) {
+    return noopService;
+  };
+
+  DollarSignInjectController.$inject = ["$http", "ServiceX", "ServiceY"];
+
   angular.module("example1").controller("NoDependenciesCtrl1",       NoDependenciesCtrl);
   angular.module("example1").controller("NoDependenciesCtrl2",       NoDependenciesCtrl2);
   angular.module("example1").controller("OneAngularDependencyCtrl1", OneAngularDependencyCtrl1);
   angular.module("example1").controller("OneAngularDependencyCtrl2", OneAngularDependencyCtrl2);
   angular.module("example1").controller("MixedDependenciesCtrl1",    MixedDependenciesCtrl1);
-  angular.module("example1").controller("MixedDependenciesCtrl2",    MixedDependenciesCtrl2);;
+  angular.module("example1").controller("MixedDependenciesCtrl2",    MixedDependenciesCtrl2);
+
+  var dollarSignInjectComponent = {
+    template: '<div></div>',
+    controller: DollarSignInjectController
+  };
+
+  var noDependenciesComponent1 = {
+    template: '<div></div>',
+    controller: NoDependenciesCtrl
+  };
+
+  var noDependenciesComponent2 = {
+    template: '<div></div>',
+    controller: NoDependenciesCtrl2
+  };
+
+  var oneAngularDependencyComponent1 = {
+    template: '<div></div>',
+    controller: OneAngularDependencyCtrl1
+  };
+
+  var oneAngularDependencyComponent2 = {
+    template: '<div></div>',
+    controller: OneAngularDependencyCtrl2
+  };
+
+  var mixedDependencyComponent1 = {
+    template: '<div></div>',
+    controller: MixedDependenciesCtrl1
+  };
+
+  var mixedDependencyComponent2 = {
+    template: '<div></div>',
+    controller: MixedDependenciesCtrl2
+  };
+
+  angular.module("example1").component("dollarSignInjectComponent",      dollarSignInjectComponent);
+  angular.module("example1").component("noDependenciesCtrl1",            noDependenciesComponent1);
+  angular.module("example1").component("noDependenciesCtrl2",            noDependenciesComponent2);
+  angular.module("example1").component("oneAngularDependencyComponent1", oneAngularDependencyComponent1);
+  angular.module("example1").component("oneAngularDependencyComponent2", oneAngularDependencyComponent2);
+  angular.module("example1").component("mixedDependencyComponent1",      mixedDependencyComponent1);
+  angular.module("example1").component("mixedDependencyComponent2",      mixedDependencyComponent2);
 };

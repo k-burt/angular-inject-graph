@@ -21,7 +21,7 @@ module.exports = function (options) {
       var module;
 
       if(deps) {
-        var ngMaterialDepIndex = deps.indexOf('ngMaterial');
+        var ngMaterialDepIndex = deps.indexOf("ngMaterial");
         if(ngMaterialDepIndex !== -1) {
           deps.splice(ngMaterialDepIndex, 1);
         }
